@@ -1,6 +1,8 @@
-import React, { useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { maxPhotoBytes, preparePhoto } from './photos';
 import ProfileStats from './ProfileStats';
+import ProfileMedia from './ProfileMedia';
+import StoryArchive from './StoryArchive';
 
 export function Avatar({ url, initial }) {
   return (
@@ -12,10 +14,12 @@ export function Avatar({ url, initial }) {
 
 export default function Profile({ user, pending, error, onLogout, onSave }) {
   const [username, setUsername] = useState(user.username);
+  const [bio, setBio] = useState(user.bio ?? '');
   const [photo, setPhoto] = useState(null);
   const [reading, setReading] = useState(false);
   const [photoError, setPhotoError] = useState('');
   const [saved, setSaved] = useState(false);
+  const [editing, setEditing] = useState(false);
   const photoDialog = useRef(null);
   const displayName = user.fullName || user.username;
   const photoUrl = photo || user.avatarUrl;
@@ -45,10 +49,11 @@ export default function Profile({ user, pending, error, onLogout, onSave }) {
   async function save(event) {
     event.preventDefault();
     setSaved(false);
-    const fields = { username: username.trim() };
+    const fields = { username: username.trim(), bio: bio.trim() };
     if (photo) fields.avatarUrl = photo;
     if (await onSave(fields)) {
       setUsername(fields.username.toLowerCase());
+      setBio(fields.bio);
       setPhoto(null);
       setSaved(true);
     }
@@ -56,7 +61,6 @@ export default function Profile({ user, pending, error, onLogout, onSave }) {
 
   return (
     <section id="profile" className="dashboard-profile" aria-labelledby="profile-title">
-      <h2 id="profile-title">Profilingiz</h2>
       <div className="dashboard-user">
         {photoUrl ? (
           <button type="button" className="profile-photo-button" aria-label="Profil rasmini kattalashtirish"
@@ -65,11 +69,17 @@ export default function Profile({ user, pending, error, onLogout, onSave }) {
           </button>
         ) : avatar}
         <div>
-          <strong>{displayName}</strong>
+          <h1 id="profile-title">{displayName}</h1>
           <p>@{user.username}</p>
         </div>
       </div>
+      {user.bio && <p className="profile-bio">{user.bio}</p>}
       <ProfileStats />
+      <div className="profile-tools">
+        <button className="btn btn-sm btn-outline" type="button" aria-expanded={editing}
+          aria-controls="edit-profile" onClick={() => setEditing(!editing)}>Profilni tahrirlash</button>
+        <StoryArchive />
+      </div>
       {photoUrl && (
         <dialog ref={photoDialog} className="profile-photo-dialog" aria-labelledby="profile-photo-title">
           <div className="profile-photo-header">
@@ -81,12 +91,17 @@ export default function Profile({ user, pending, error, onLogout, onSave }) {
           <img src={photoUrl} alt={`${displayName} profil rasmi`} />
         </dialog>
       )}
-      <form className="profile-form" onSubmit={save}>
+      <form id="edit-profile" className="profile-form" hidden={!editing} onSubmit={save}>
         <label>
           Username qo‘yish
           <input name="username" value={username} required minLength={3} maxLength={30}
             pattern="[A-Za-z0-9._]{3,30}" autoComplete="username" disabled={pending}
             onChange={(event) => { setUsername(event.target.value); setSaved(false); }} />
+        </label>
+        <label>
+          Bio
+          <textarea name="bio" rows={3} maxLength={150} value={bio} disabled={pending}
+            onChange={(event) => { setBio(event.target.value); setSaved(false); }} />
         </label>
         <label>
           Profil rasmi qo‘yish
@@ -99,9 +114,11 @@ export default function Profile({ user, pending, error, onLogout, onSave }) {
           {reading ? 'Rasm tayyorlanmoqda…' : 'Profilni saqlash'}
         </button>
       </form>
-      <button className="profile-logout" type="button" disabled={pending || reading} onClick={onLogout}>
+      {!editing && error && <p className="error" role="alert">{error}</p>}
+      <button className="btn btn-sm btn-ghost md:hidden" type="button" disabled={pending || reading} onClick={onLogout}>
         Hisobdan chiqish
       </button>
+      <ProfileMedia />
     </section>
   );
 }

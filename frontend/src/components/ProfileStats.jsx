@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { connectionsUrl, searchAccounts, updateFollow } from './social';
+import { useEffect, useRef, useState } from 'react';
+import { FiSearch } from 'react-icons/fi';
+import { connectionsUrl, updateFollow } from './social';
 const titles = { followers: 'Obunachilar', following: 'Obunalar' };
 
 export default function ProfileStats() {
@@ -9,7 +10,6 @@ export default function ProfileStats() {
   const [reload, setReload] = useState(0);
   const [section, setSection] = useState('followers');
   const [query, setQuery] = useState('');
-  const [results, setResults] = useState(null);
   const [pending, setPending] = useState(false);
   const [error, setError] = useState('');
 
@@ -31,22 +31,8 @@ export default function ProfileStats() {
   function open(name) {
     setSection(name);
     setQuery('');
-    setResults(null);
     setError('');
     dialog.current.showModal();
-  }
-
-  async function search(event) {
-    event.preventDefault();
-    setPending(true);
-    setError('');
-    try {
-      setResults(await searchAccounts(query));
-    } catch {
-      setError('Qidiruv amalga oshmadi. Qayta urinib ko‘ring.');
-    } finally {
-      setPending(false);
-    }
   }
 
   async function changeFollow(account, follow) {
@@ -65,7 +51,11 @@ export default function ProfileStats() {
     }
   }
 
-  const accounts = results ?? connections?.[section] ?? [];
+  const list = connections?.[section] ?? [];
+  const term = query.trim().toLowerCase();
+  const accounts = section === 'following' && term
+    ? list.filter((account) => (account.fullName || account.username).toLowerCase().includes(term))
+    : list;
   const followingIds = new Set(connections?.following.map(({ id }) => id));
 
   return (
@@ -91,17 +81,14 @@ export default function ProfileStats() {
           <form method="dialog"><button type="submit">Yopish</button></form>
         </div>
         {section === 'following' && (
-          <form className="connections-search profile-form" onSubmit={search}>
-            <label>
-              Username bo‘yicha qidirish
-              <input type="search" maxLength={30} value={query} disabled={pending}
-                onChange={(event) => { setQuery(event.target.value); setResults(null); }} />
-            </label>
-            <button type="submit" disabled={pending || !query.trim()}>Qidirish</button>
-          </form>
+          <label className="connections-filter">
+            <FiSearch aria-hidden="true" />
+            <input type="search" aria-label="Qidiruv" placeholder="Qidiruv" value={query}
+              onChange={(event) => setQuery(event.target.value)} />
+          </label>
         )}
         {error && <p className="error" role="alert">{error}</p>}
-        {accounts.length === 0 ? <p>{results ? 'Akkaunt topilmadi.' : 'Ro‘yxat hozircha bo‘sh.'}</p> : (
+        {accounts.length === 0 ? <p>{term ? 'Mos obuna topilmadi.' : 'Ro‘yxat hozircha bo‘sh.'}</p> : (
           <ul className="connections-list">
             {accounts.map((account) => {
               const isFollowing = followingIds.has(account.id);

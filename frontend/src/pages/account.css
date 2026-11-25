@@ -1,0 +1,55 @@
+.account-page { @apply mx-auto w-full max-w-2xl px-4 py-6 sm:px-8 sm:py-10; }
+.account-page h1 { @apply text-2xl font-bold tracking-tight; }
+.account-page .dashboard-user { @apply mb-6 flex items-center gap-4; }
+.account-page .dashboard-user p, .activity-list time { @apply text-sm text-base-content/65; }
+.account-page .dashboard-avatar { @apply grid h-12 w-12 shrink-0 place-items-center overflow-hidden rounded-full bg-base-200 font-bold text-primary; }
+.account-page .dashboard-user .dashboard-avatar { @apply h-20 w-20 text-2xl ring-2 ring-base-300 sm:h-24 sm:w-24; }
+.account-page .dashboard-avatar img { @apply h-full w-full object-cover; }
+.account-page .dashboard-user h1 { overflow-wrap: anywhere; }
+.account-page .profile-photo-button { @apply shrink-0 rounded-full; }
+.account-page .profile-stats { @apply mb-5 grid grid-cols-3 overflow-hidden rounded-2xl border border-base-300 bg-base-200; }
+.account-page .profile-stat { @apply grid min-h-16 place-content-center gap-1 p-1 text-center; }
+.account-page .profile-stat + .profile-stat { @apply border-l border-base-300; }
+.account-page .profile-stat strong { @apply text-lg; }
+.account-page .profile-stat span { @apply text-xs sm:text-sm; }
+.account-page button.profile-stat:hover:enabled { @apply bg-base-300; }
+.account-page .profile-form:not([hidden]) { @apply my-4 grid gap-3 rounded-2xl border border-base-300 p-4; }
+.account-page .profile-form label { @apply grid gap-2 text-sm font-semibold; }
+.account-page .profile-form input, .account-page .profile-form textarea { @apply min-w-0 rounded-lg border border-base-300 bg-base-100 p-2; }
+.account-page .profile-form textarea { @apply resize-y; }
+.profile-bio { @apply mb-5 whitespace-pre-wrap break-words text-sm; }
+.account-page .profile-form button, .account-page dialog button:not(.profile-stat), .account-page .note-button {
+  @apply rounded-lg bg-base-200 px-3 py-2 text-sm font-semibold hover:bg-base-300 disabled:opacity-60;
+}
+.account-page .error { @apply my-2 rounded-lg bg-error/10 p-3 text-sm text-error; }
+.account-page .profile-status { @apply text-sm text-success; }
+.account-page .profile-tools { @apply mx-auto grid w-full max-w-sm grid-cols-2 gap-2; }
+.account-page .profile-tools > button { @apply h-auto min-h-9 min-w-0 px-1.5 text-center; }
+.account-page .profile-posts { @apply mt-7 border-t border-base-300 text-center; }
+.account-page .profile-posts h2 { @apply font-semibold; }
+.account-page .profile-posts p { @apply text-sm text-base-content/65; }
+.profile-media-nav { @apply grid grid-cols-5 border-b border-base-300; }
+.profile-media-nav button { @apply grid min-h-12 place-items-center border-b-2 border-transparent text-xl text-base-content/65 hover:bg-base-200; }
+.profile-media-nav button[aria-pressed="true"] { @apply border-primary text-primary; }
+.profile-media-empty { @apply grid justify-items-center gap-2 px-4 py-10; }
+.profile-media-empty > svg { @apply h-9 w-9 rounded-xl bg-base-200 p-2 text-primary; }
+.account-page dialog { @apply w-[92vw] max-w-md rounded-2xl border border-base-300 bg-base-100 p-4 text-base-content; margin: auto; }
+.account-page dialog::backdrop { background: #0009; }
+.account-page .profile-photo-header { @apply mb-3 flex items-center justify-between gap-2 font-semibold; }
+.account-page dialog img { @apply mx-auto max-h-[65vh] max-w-full rounded-lg object-contain; }
+.account-page .story-archive { @apply max-w-xl; }
+.archive-grid { @apply grid grid-cols-2 gap-2 sm:grid-cols-3; }
+.account-page .archive-grid button { @apply grid w-full gap-1 p-1 text-xs; }
+.account-page .archive-grid img { @apply aspect-[3/4] w-full rounded-md object-cover; }
+.archive-preview { @apply grid justify-items-center gap-3; }
+.archive-preview button { @apply inline-flex items-center gap-1; }
+.account-page .connections-list li { @apply flex flex-wrap items-center justify-between gap-2 border-b border-base-300 py-3; }
+.connections-filter { @apply mb-3 flex items-center gap-2 rounded-lg bg-base-200 px-3 focus-within:ring-2 focus-within:ring-primary; }
+.connections-filter svg { @apply shrink-0 text-base-content/65; }
+.connections-filter input { @apply min-w-0 flex-1 bg-transparent py-2 text-sm outline-none; }
+.activity-page h1 { @apply mb-5; }
+.activity-list li { @apply grid grid-cols-[auto,minmax(0,1fr),auto] items-center gap-3 border-b border-base-300 py-3; }
+.activity-list li > svg { @apply text-primary; }
+.activity-list time { @apply mt-1 block; }
+.activity-empty { @apply grid justify-items-center gap-3 rounded-2xl border border-base-300 p-8 text-center text-sm; }
+.activity-empty svg { @apply h-8 w-8 text-primary; }
