@@ -7,15 +7,6 @@
 .account-page .dashboard-avatar img { @apply h-full w-full object-cover; }
 .account-page .dashboard-user h1 { overflow-wrap: anywhere; }
 .account-page .profile-photo-button { @apply shrink-0 rounded-full; }
-.profile-avatar-area { @apply grid w-28 shrink-0 justify-items-center gap-2 sm:w-32; }
-.profile-note-bubble {
-  @apply relative flex min-h-8 w-full items-center justify-center gap-1 rounded-2xl border border-base-300 bg-base-200 px-2 py-1 text-xs hover:bg-base-300;
-}
-.profile-note-bubble > span { @apply line-clamp-2 break-words; }
-.profile-note-bubble::after {
-  content: '';
-  @apply absolute -bottom-1 left-1/2 h-2 w-2 rotate-45 border-b border-r border-base-300 bg-inherit;
-}
 .account-page .profile-stats { @apply mb-5 grid grid-cols-3 overflow-hidden rounded-2xl border border-base-300 bg-base-200; }
 .account-page .profile-stat { @apply grid min-h-16 place-content-center gap-1 p-1 text-center; }
 .account-page .profile-stat + .profile-stat { @apply border-l border-base-300; }
@@ -62,20 +53,3 @@
 .activity-list time { @apply mt-1 block; }
 .activity-empty { @apply grid justify-items-center gap-3 rounded-2xl border border-base-300 p-8 text-center text-sm; }
 .activity-empty svg { @apply h-8 w-8 text-primary; }
-.activity-heading { @apply mb-5 flex flex-wrap items-center justify-between gap-3; }
-.activity-heading h1 { @apply mb-0; }
-.activity-list .activity-unread { @apply border-l-2 border-l-primary bg-base-200 px-2; }
-.activity-thumbnail { @apply h-12 w-12 rounded-md object-cover; }
-.profile-post-grid { @apply grid grid-cols-3 gap-1 pt-1; }
-.profile-post-grid img { @apply aspect-square w-full object-cover; }
-.profile-highlights { @apply mt-6; }
-.profile-highlights h2 { @apply mb-2 text-sm font-semibold; }
-.highlight-list { @apply flex gap-3 overflow-x-auto px-1 py-2; }
-.highlight-list li { @apply w-20 shrink-0; }
-.highlight-button { @apply grid w-full justify-items-center gap-2 rounded-lg text-center text-xs; }
-.highlight-circle { @apply grid h-16 w-16 place-items-center overflow-hidden rounded-full border-2 border-base-300 bg-base-200 text-2xl text-primary; }
-.highlight-circle img { @apply h-full w-full object-cover; }
-.highlight-label { @apply w-full truncate; }
-.account-page .highlight-picker { @apply grid max-h-52 gap-2 overflow-y-auto; }
-.account-page .highlight-picker label { @apply flex items-center gap-2 font-normal; }
-.highlight-controls { @apply flex flex-wrap items-center justify-center gap-2; }

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { FiBookmark, FiGrid, FiRepeat, FiUsers, FiVideo } from 'react-icons/fi';
-import { imageUrl } from '../api/client';
 
 const sections = [
   { name: 'Postlar', empty: 'Hozircha postlar yo‘q.', Icon: FiGrid },
@@ -10,7 +9,7 @@ const sections = [
   { name: 'Hamkorlik', empty: 'Hozircha hamkorlikdagi postlar yo‘q.', Icon: FiUsers },
 ];
 
-export default function ProfileMedia({ posts = [] }) {
+export default function ProfileMedia() {
   const [selected, setSelected] = useState(0);
   const { name, empty, Icon } = sections[selected];
 
@@ -24,19 +23,11 @@ export default function ProfileMedia({ posts = [] }) {
           </button>
         ))}
       </div>
-      {selected === 0 && posts.length > 0 ? (
-        <ul className="profile-post-grid" aria-label="Postlar">
-          {posts.map((post) => (
-            <li key={post._id}>
-              <img src={imageUrl(post.image)} alt={post.caption || 'Profil posti'} loading="lazy" />
-            </li>
-          ))}
-        </ul>
-      ) : <div className="profile-media-empty" aria-live="polite">
+      <div className="profile-media-empty" aria-live="polite">
         <Icon aria-hidden="true" />
         <h2>{name}</h2>
         <p>{empty}</p>
-      </div>}
+      </div>
     </section>
   );
 }

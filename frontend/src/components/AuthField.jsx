@@ -1,21 +1,20 @@
-// daisyUI form-control + input with icon. `error` shows a hint under the field.
-const AuthField = ({ id, label, icon: Icon, trailing, error, ...inputProps }) => (
-  <div className="form-control w-full">
-    <label className="label pb-1" htmlFor={id}>
-      <span className="label-text font-medium">{label}</span>
+const AuthField = ({ id, label, icon: Icon, trailing, ...inputProps }) => (
+  <div className="form-control w-full gap-1">
+    <label className="label px-0" htmlFor={id}>
+      <span className="label-text font-semibold">{label}</span>
     </label>
-    <label
-      className={`input input-bordered flex items-center gap-3 ${error ? 'input-error' : 'focus-within:input-primary'}`}
-    >
-      <Icon className="shrink-0 opacity-50" size={18} />
-      <input id={id} className="grow" aria-invalid={Boolean(error)} {...inputProps} />
+    <div className="relative">
+      <Icon
+        className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-base-content/50"
+        size={18}
+      />
+      <input
+        id={id}
+        className="input input-bordered input-primary w-full pl-11 pr-12"
+        {...inputProps}
+      />
       {trailing}
-    </label>
-    {error && (
-      <div className="label pb-0">
-        <span className="label-text-alt text-error">{error}</span>
-      </div>
-    )}
+    </div>
   </div>
 );
 

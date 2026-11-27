@@ -27,7 +27,6 @@ npm run build
 ## Sahifalar
 
 Home, Reels, Chat, Search, Notifications, Post, Profile. Login/Register va route guard mavjud.
-Login/register backend'ga ulangan (`nf-2956/intagram-clone-backend`, `http://localhost:8000`). Boshqa manzil uchun `.env` da `VITE_API_URL`.
-API chaqiruvlari: `src/api/client.js`.
+Login va ro‘yxatdan o‘tish loyiha backendiga ulangan. Lokal sozlash uchun asosiy `README.md` fayliga qarang.
 
 Vazifalar: `tasks.md`.
