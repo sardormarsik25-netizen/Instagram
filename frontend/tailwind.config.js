@@ -4,7 +4,11 @@ import daisyui from 'daisyui';
 export default {
   content: ['./index.html', './src/**/*.{js,jsx}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        logo: ['"Grand Hotel"', 'cursive'],
+      },
+    },
   },
   plugins: [daisyui],
   daisyui: {

@@ -1,12 +1,11 @@
-import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 const GuestRoute = () => {
-  const isAuthenticated = useSelector((state) => Boolean(state.auth.user));
-  const location = useLocation();
+  const isAuthenticated = useSelector((state) => state.auth.isAuthenticated);
 
   if (isAuthenticated) {
-    return <Navigate to={location.state?.from?.pathname || '/'} replace />;
+    return <Navigate to="/" replace />;
   }
 
   return <Outlet />;

@@ -9,18 +9,13 @@ import {
   persistReducer,
   persistStore,
 } from 'redux-persist';
+import storage from 'redux-persist/lib/storage';
 import authReducer from './authSlice';
 
-const storage = {
-  async getItem(key) { return localStorage.getItem(key); },
-  async setItem(key, value) { localStorage.setItem(key, value); },
-  async removeItem(key) { localStorage.removeItem(key); },
-};
-
+// Persists the whole auth slice (user, token, isAuthenticated)
 const persistConfig = {
-  key: 'instagram-session',
+  key: 'instagram-clone',
   storage,
-  whitelist: ['user'],
 };
 
 export const store = configureStore({

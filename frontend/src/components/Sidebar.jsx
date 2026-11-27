@@ -3,8 +3,7 @@ import { useDispatch } from 'react-redux';
 import { FiInstagram, FiLogOut } from 'react-icons/fi';
 import { toast } from 'react-toastify';
 import { navItems } from '../constants/navItems';
-import { authRequest } from '../store/authApi';
-import { setUser } from '../store/authSlice';
+import { logout } from '../store/authSlice';
 
 const navClass = ({ isActive }) =>
   `flex items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
@@ -15,15 +14,10 @@ const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      await authRequest('logout');
-      dispatch(setUser(null));
-      toast.info('Sessiya tugatildi');
-      navigate('/login', { replace: true });
-    } catch (error) {
-      toast.error(error.message);
-    }
+  const handleLogout = () => {
+    dispatch(logout());
+    toast.info('Sessiya tugatildi');
+    navigate('/login', { replace: true });
   };
 
   return (

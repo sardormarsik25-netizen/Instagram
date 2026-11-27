@@ -4,7 +4,7 @@ Instagram uslubidagi o‘quv loyihasi. Frontend React, Redux Toolkit va Redux Pe
 
 ## Lokal ishga tushirish
 
-MongoDB’ni ishga tushiring va `backend/.env.example` asosida `backend/.env` yarating. `MONGODB_URI` ni bazangizga moslang. Backend qayta ishga tushganda sessiyalar saqlanishi uchun `SESSION_SECRET` ga kamida 32 belgili tasodifiy qiymat qo‘ying.
+MongoDB’ni ishga tushiring va `backend/.env.example` asosida `backend/.env` yarating. Lokal baza uchun `MONGO_URI=mongodb://127.0.0.1:27017/instagram` ishlatishingiz mumkin. `JWT_SECRET` ga uzun, tasodifiy qiymat qo‘ying. Frontend sukut bo‘yicha backendga `http://localhost:8000` orqali ulanadi.
 
 Backend uchun:
 
